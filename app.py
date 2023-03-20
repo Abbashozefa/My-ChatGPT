@@ -19,23 +19,17 @@ openai.api_key=api_key
 app=Flask(__name__)
 
 
-@app.route("/",methods=['POST','GET'])
+@app.route("/")
 def home():
-    if request.method == 'POST':
-        prompt=str(request.form['msg'])
-        response =openai.Completion.create(engine="text-davinci-003",prompt=prompt,max_tokens=2000)   
-    
-        return response['choices'][0]["text"]
-    else:
-        return render_template('index.html')
+    return render_template('index.html')
 
-# @app.route("/get",methods=['POST','GET'])
-# def webhook():
-#     prompt=str(request.form['msg'])
-#     response =openai.Completion.create(engine="text-davinci-003",prompt=prompt,max_tokens=2000)
+@app.route("/get",methods=['POST','GET'])
+def webhook():
+    prompt=str(request.form['msg'])
+    response =openai.Completion.create(engine="text-davinci-003",prompt=prompt,max_tokens=2000)
       
     
-#     return response['choices'][0]["text"]
+    return response['choices'][0]["text"]
     
     
     
